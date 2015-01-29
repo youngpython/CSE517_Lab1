@@ -38,6 +38,7 @@ find(alldists(:,:)==dists(:,:));
 
 alldists = l2distance(xTr, xTe);
 alldistssorted = sort(l2distance(xTr, xTe), 1, 'ascend');
+indices = 
 
 %When we're at column i, find the distances from column i to each 
 %column in training data
