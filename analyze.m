@@ -16,7 +16,12 @@ switch kind
 		output=sum(abs(truth-preds))/length(truth);
 		
 	case 'acc' 
-		%% fill in code here
-		 	
+		%compare actual Te labels to labels found w/
+        %[indices,dists] = findknn(xTr,xTe,k); 
+		%knn_predicted_labels = yTr(indices);
+        %predicted_labels = mode(knn_predicted_labels);
+        %truth = yTe;
+        output=1-sum(truth==preds,2)/length(truth);
+        
 end;
 

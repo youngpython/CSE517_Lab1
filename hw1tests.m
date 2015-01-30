@@ -11,7 +11,7 @@ function [r,s]=hw1tests()
 
 
 % Put in any seed below
-rand('seed',31415926535);
+rand('seed',2341235);
 % initial outputs
 r=0;
 s={};

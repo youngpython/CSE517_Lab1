@@ -14,35 +14,27 @@ function [indices,dists]=findknn(xTr,xTe,k);
 %
 
 %%
-%Go through each column of testing data
-%{
+%compute all distances 
 alldists = l2distance(xTr, xTe);
-%sort distances from smallest to largest
-all_dists_sorted = sort(alldists, 1, 'ascend');
-%create k by m matrix of nearest neighbor distances
-dists = all_dists_sorted(1:k, :);
-%extract largest nearest neighbor dist for each column of testing data
-largest_possible_distance = dists(k,:);
-%indices = alldists(:,find(alldists <= largest_possible_distance));
-indices = find(alldists <= largest_possible_distance);
-indices = (alldists <= largest_possible_distance)(:)
-find(alldists(:,:)==dists(:,:));
-%}
+%alldists is nbym, n is xTr rows, m is xTe cols
+%sort distances in ascending order in eacdgsdh column
+%sorting by nearest neighbor of each xTe vec (in cols) in all of the xTr vectors
+[sorted_dists, nn_index_vals] = sort(alldists);
+%reduce sorted nearest neighbor dist and index matrices to k rows
+knn_dists = sorted_dists(1:k,:);
+knn_indices = nn_index_vals(1:k,:);
 
-%{
-%alldistsandindices = cellfun(@(x) , alldists
-%all_dists = sort(l2distance(xTr, xTe), 1, 'ascend');
-%dists = all_dists(1:k, :);
-%indices = zeros(k, width(xTe))
-%}
+dists = knn_dists;
+indices = knn_indices;
+%indices(2,3)=5 means that 5th vec in xTr, xTr(:,5) is 2nd
+%closest nn to xTe(:,3) <- 3rd column vec in xTe
 
-alldists = l2distance(xTr, xTe);
-alldistssorted = sort(l2distance(xTr, xTe), 1, 'ascend');
-
-%When we're at column i, find the distances from column i to each 
-%column in training data
-%Figure out the k smallest distances, and these will be the columns
-%returned, in increasing order down the outputted matrix
-	
+% demo that above code works:
+%A = 5*rand(5,7);
+%[sorted_A,A_index_vals] = sort(A);
+%sorted_A;
+%k=3;
+%Ann_dists = sorted_A(1:k,:)
+%Ann_indices = A_index_vals(1:k,:)	
 %%	%
 	
