@@ -41,4 +41,26 @@ if (acc_ ~= 1.0)
     r = r + 1;
     s{length(s) + 1} = ['You cheated. Heres the code: ', fileread('analyze.m')];
 end;
+
+x=[[1,0,0,1];[0 1 0 1]];
+y=[1 1 2 2];
+
+if ~(all(knnclassifier(x,y,x,1)==y))
+	r=r+1;				% set output conditions and exit
+	s{length(s)+1}='Error with XOR data set. ';
+end;
+
+D=[ 0    78    24
+    78     0    78
+    24    78     0];
+if (norm(l2distance(magic(3)).^2-D)>eps*1000)
+    r=r+1;
+	s{length(s)+1}='Distances inaccurate.'
+end;	
+
+if analyze('acc',[1 2 3 4],[1 2 3 0])~=0.75,
+    r=r+1;
+	s{length(s)+1}='Analyze function incorrect.'
+end;	
+
 %% fill in code here

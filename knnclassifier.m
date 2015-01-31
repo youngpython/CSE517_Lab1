@@ -14,7 +14,12 @@ function preds=knnclassifier(xTr,yTr,xTe,k)
 %
 [indices,dists] = findknn(xTr,xTe,k); 
 knn_predicted_labels = yTr(indices);
-preds = mode(knn_predicted_labels);
+
+if (size(knn_predicted_labels,1)==1)
+    preds = knn_predicted_labels;
+else
+    preds = mode(knn_predicted_labels); 
+end;
 
 
 
