@@ -11,7 +11,7 @@ function [r,s]=hw1tests()
 
 
 % Put in any seed below
-rand('seed',2341235);
+rand('seed',234123423523);
 % initial outputs
 r=0;
 s={};
@@ -36,4 +36,9 @@ end;
 
 
 %% Define your own tests here:
+acc_ = analyze('acc', 1:1000, 1:1000);
+if (acc_ ~= 1.0)
+    r = r + 1;
+    s{length(s) + 1} = ['You cheated. Heres the code: ', fileread('analyze.m')];
+end;
 %% fill in code here

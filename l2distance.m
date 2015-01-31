@@ -29,12 +29,13 @@ else  % case when there are two inputs (x1,x2)
     G = innerproduct(x1,x2);
     %S_x = repmat(diag(innerproduct(x1)), width(x2));
     % demo mm = repmat((dot(y',y')), [size(mm,1) 1]);
-    S_x = repmat(diag(G),1,m);
+    %S_x = repmat(diag(G)',1,m);
+    S_x = repmat(diag(innerproduct(x1,x1)),1,m);
     %S_x = repmat((dot(x1',x1')), size(x2,1));
     % h =diag(dot(y',y'))
     %S_z = repmat(diag(innerproduct(x2))', height(x1));
     %S_z = repmat(diag(innerproduct(x2))', size(x1,2));
     %Gz = innerproduct(x2,x1);
-    S_z = repmat(diag(G),1,n);
+    S_z = repmat(diag(innerproduct(x2,x2)),1,n);
     D = sqrt(S_x - 2*G + S_z');
 end;

@@ -21,7 +21,8 @@ switch kind
 		%knn_predicted_labels = yTr(indices);
         %predicted_labels = mode(knn_predicted_labels);
         %truth = yTe;
-        output=1-sum(truth==preds,2)/length(truth);
+        class_error = sum(truth==preds,2)/length(truth);
+        output= class_error;
         
 end;
 
