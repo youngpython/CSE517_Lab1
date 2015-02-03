@@ -8,7 +8,7 @@ function output=analyze(kind,truth,preds)
 % (other values of 'kind' will follow later)
 % 
 
-
+EPSILON = 1e-14;
 
 switch kind
 	case 'abs'
@@ -16,12 +16,11 @@ switch kind
 		output=sum(abs(truth-preds))/length(truth);
 		
 	case 'acc' 
-		%compare actual Te labels to labels found w/
-        %[indices,dists] = findknn(xTr,xTe,k); 
-		%knn_predicted_labels = yTr(indices);
-        %predicted_labels = mode(knn_predicted_labels);
-        %truth = yTe;
-        class_error = sum(truth==preds,2)/length(truth);
+		% compute the percent of labels which differed between truth and 
+        % predictions - find # of pairs of labels whose values do not fall
+        % within a tolerance, and get its ratio over the total # of label
+        % pairs
+        class_error = sum(abs(truth-preds)<EPSILON,2)/length(truth);
         output= class_error;
         
 end;

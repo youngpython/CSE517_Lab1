@@ -63,19 +63,4 @@ if analyze('acc',[1 2 3 4],[1 2 3 0])~=0.75,
 	s{length(s)+1}='Analyze function incorrect.'
 end;	
 
-v = randi(5,100,1);
-unique_labels = unique(v);
-% Value - # occurrences
-counts_of_labels = [unique_labels histc(v,unique_labels)];
-a = [1 26;2 26; 3 35; 4 26; 6 35]
-most_common_label = max(a(:,2));
-num_of_labels_that_satisfy_mode = find(a(:,2) == most_common_label);
-if (length(num_of_labels_that_satisfy_mode)>1)
-    %no clear mode!
-    %fall back on k=1
-    pred(
-end;
-
-if (max(a)==
-
 %% fill in code here
