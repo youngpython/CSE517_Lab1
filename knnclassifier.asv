@@ -32,19 +32,13 @@ else
     % neighbor (k=1) in the case of a tie in column modes.  The goal is to
     % take a mutated matrix of the predicted labels, where each cell in
     % "ties" that contains a tie is zeroed out, and add it with a mutated
-    % matrix in the row of 1st nearest neighbors, where each cell is zeroed
-    % out if its corresponding index in the "ties" array is not.
-    
-    % Perform the aforementioned mutation on "ties"
+    % matrix in the row of 1st nearest neighbors, where the indi
     preds_temp = cellfun(@(X) iif(length(X)==1, @() X(1), true, @() 0), ties);
     tied_indices = find(preds_temp == 0);
-    
-    % Obtain the correct indices to zero out in the predicted labels
     k_is_one_indices = 1:size(knn_predicted_labels,2);
     k_is_one_indices(tied_indices) = [];
-    
-    % Perform the mautation on the predicted labels, and sum the two.
     nearest_neighbors = knn_predicted_labels(1,:);
     nearest_neighbors(k_is_one_indices) = 0;
     preds = preds_temp + nearest_neighbors;
+    %preds = cellfun(@(X) iif(length(X)==1, @() X(1), true, @() knn_predicted_labels(1, X)), ties); %if length(ties)==1 X(1) else preds(1);
 end;
